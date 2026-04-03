@@ -1,5 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import axios from 'axios';
+import L from 'leaflet';
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import { Circle, MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 import {
     AlertCircle,
@@ -37,6 +41,13 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 
 const SAMPLE_IPS = ['8.8.8.8', '1.1.1.1', '208.67.222.222'];
 const LOCATION_RADIUS_METERS = 320;
+
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: markerIcon2x,
+    iconUrl: markerIcon,
+    shadowUrl: markerShadow,
+});
 
 const flag = (code) =>
     code?.length === 2
